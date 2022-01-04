@@ -15,7 +15,7 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ray = new Ray2D(transform.position, transform.up);
+        ray = new Ray2D(transform.position, transform.right);
 
         beam.positionCount = 1;
         beam.SetPosition(0, transform.position);

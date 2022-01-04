@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 388121774}
   - component: {fileID: 388121778}
   m_Layer: 0
-  m_Name: emitter
+  m_Name: laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e9e1da48a3a4b4e85ac2b02048b3d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 8
+  maxDistance: 30
   maxReflections: 8
   beam: {fileID: 388121774}
   mirrors:
@@ -443,7 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7cd47975696cd5478acd3127a560f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 10
+  rotationSensitivity: 0.5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
