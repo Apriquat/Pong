@@ -5,19 +5,26 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private float ballMoveSpeed;
-    private SpriteRenderer spriteRenderer;
-    public static Vector3 move;
+    public static Rigidbody2D rb;
+    private Vector2 lastVelocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        move = Vector3.right;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector2(ballMoveSpeed, 0f);
+        lastVelocity = rb.velocity;
     }
 
-    private void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        transform.position += move * ballMoveSpeed * Time.deltaTime;
+        Vector2 newVelocity;
+        newVelocity.x = -lastVelocity.x;
+        newVelocity.y = (lastVelocity.y / 2 + collision.collider.attachedRigidbody.velocity.y / 3);
+        rb.velocity = newVelocity;
+
+        lastVelocity = newVelocity;
+
+
     }
 }

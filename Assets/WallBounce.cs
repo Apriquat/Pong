@@ -7,7 +7,5 @@ public class WallBounce : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
-        Ball.move = -Ball.move;
-        Debug.Log("Ball Collision");
     }
 }
