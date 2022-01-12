@@ -16,11 +16,19 @@ public class Player1Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float move = Input.GetAxisRaw("Vertical");
-        Vector2 moveVec = new Vector2(0, move * playerMoveSpeed);
+        float move = Input.GetAxisRaw("Vertical") * Time.deltaTime;
+        Vector2 moveVec = new Vector2(0, move * PlayerManager.playerMoveSpeed);
 
         rb.velocity = moveVec;
 
-        Debug.Log(moveVec);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == TwoPlayerTurns.BALL_ID)
+        {
+            TwoPlayerTurns.AITurn = true;
+            Debug.Log("AI TURN");
+        }
     }
 }

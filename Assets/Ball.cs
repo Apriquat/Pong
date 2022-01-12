@@ -19,8 +19,10 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Vector2 newVelocity;
-        newVelocity.x = -lastVelocity.x;
-        newVelocity.y = (lastVelocity.y / 2 + collision.collider.attachedRigidbody.velocity.y / 3);
+        newVelocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
+        newVelocity.y += collision.collider.attachedRigidbody.velocity.y / 3;
+        //newVelocity.x = -lastVelocity.x;
+        //newVelocity.y = (lastVelocity.y / 2 + collision.collider.attachedRigidbody.velocity.y / 3);
         rb.velocity = newVelocity;
 
         lastVelocity = newVelocity;
