@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine
 
 public class Ball : MonoBehaviour
 {
+
     [SerializeField] private float ballMoveSpeed;
     public static Rigidbody2D rb;
     private Vector2 lastVelocity;
@@ -14,6 +15,8 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(ballMoveSpeed, 0f);
         lastVelocity = rb.velocity;
+
+        GameEvents.current.OnGameReset += ResetBall;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -28,5 +31,24 @@ public class Ball : MonoBehaviour
         lastVelocity = newVelocity;
 
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameManager.ResetGame();
+    }
+
+    public static void ResetBall()
+    {
+        rb.velocity = Vector2.zero;
+        rb.transform.position = Vector2.zero;
+
+        StartCoroutine();
+    }
+
+    IEnumerator StartBall()
+    {
+        yield return new WaitForSeconds(3);
+        rb.velocity = new Vector2(ballMoveSpeed, 0f);
     }
 }

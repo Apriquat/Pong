@@ -6,11 +6,17 @@ public class Player1Move : MonoBehaviour
 {
     [SerializeField] private float playerMoveSpeed;
     private Rigidbody2D rb;
+    private Vector2 startPos;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        startPos = transform.position;
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        GameEvents.current.OnGameReset += ResetPlayer;
     }
 
     // Update is called once per frame
@@ -30,5 +36,10 @@ public class Player1Move : MonoBehaviour
             TwoPlayerTurns.AITurn = true;
             Debug.Log("AI TURN");
         }
+    }
+
+    void ResetPlayer()
+    {
+        transform.position = startPos;
     }
 }
