@@ -14,7 +14,7 @@ public class Player2Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float move = Mathf.Clamp(Ball.rb.velocity.y, -PlayerManager.playerMoveSpeed, PlayerManager.playerMoveSpeed) * Time.deltaTime;
+        float move = Mathf.Clamp(Ball.singleton.rb.velocity.y, -PlayerManager.playerMoveSpeed, PlayerManager.playerMoveSpeed) * Time.deltaTime;
         Vector2 moveVec = new Vector2(0.0f, move);
 
         if (TwoPlayerTurns.AITurn)

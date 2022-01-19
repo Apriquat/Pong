@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine
+using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
 
+    public static Ball singleton;
+
     [SerializeField] private float ballMoveSpeed;
-    public static Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Vector2 lastVelocity;
 
     // Start is called before the first frame update
     void Start()
     {
+        singleton = this;
+
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(ballMoveSpeed, 0f);
         lastVelocity = rb.velocity;
@@ -30,7 +34,6 @@ public class Ball : MonoBehaviour
 
         lastVelocity = newVelocity;
 
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,12 +41,12 @@ public class Ball : MonoBehaviour
         GameManager.ResetGame();
     }
 
-    public static void ResetBall()
+    public void ResetBall()
     {
         rb.velocity = Vector2.zero;
         rb.transform.position = Vector2.zero;
 
-        StartCoroutine();
+        StartCoroutine("StartBall");
     }
 
     IEnumerator StartBall()
